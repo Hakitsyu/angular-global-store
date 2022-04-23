@@ -1,7 +1,6 @@
-import { BehaviorSubject, Observable, Subscriber } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 export class Store<T> {
-    private memory?: T;
     private _observable!: Observable<T>;
     private _subject!: BehaviorSubject<T>;
     
@@ -11,12 +10,11 @@ export class Store<T> {
     }
 
     set(object: T) {
-        this.memory = object;
-        this._subject.next(this.memory);
+        this._subject.next(object);
     }
 
     get(): T | undefined {
-        return this.memory;
+        return this.subject.getValue();
     }
 
     get subject() {

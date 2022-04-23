@@ -7,15 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./example-component.component.scss']
 })
 export class ExampleComponentComponent implements OnInit {
-  numbers: number[] = [];
-
   constructor(private numbersStore: NumbersStore) {
-    this.watchNumbersUpdate();
   }
 
   ngOnInit(): void {}
 
-  watchNumbersUpdate() {
-    this.numbersStore.observabler.subscribe(numbers => this.numbers = numbers);
+  get numbers(): number[] {
+    return this.numbersStore.get()!;
   }
 }
